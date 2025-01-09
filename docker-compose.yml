@@ -1,0 +1,47 @@
+﻿services:
+  # MySQL Database
+  database:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ceyhun1010
+      MYSQL_DATABASE: HotelScope
+    ports:
+      - "3307:3306" 
+    volumes:
+      - db_data:/var/lib/mysql
+
+  # RabbitMQ
+  message-queue:
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+  
+  # ELK Stack
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.10
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.17.10
+    ports:
+      - "5044:5044"
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.10
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+
+volumes:
+  db_data:
+  es_data:
