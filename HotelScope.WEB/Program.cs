@@ -1,15 +1,37 @@
+using Microsoft.EntityFrameworkCore;
+using Application.Interfaces;
+using Application.Services;
+using Infrastructure.Persistence;
+using Serilog;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
+// Database Context (Replace with your connection string)
+builder.Host.UseSerilog();
+
+Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    .WriteTo.Console() // Logs to console
+    .WriteTo.Debug()
+    .WriteTo.Elasticsearch(new Serilog.Sinks.Elasticsearch.ElasticsearchSinkOptions(new Uri("http://localhost:9200"))
+    {
+        AutoRegisterTemplate = true,
+        IndexFormat = "mvc-logs-{0:yyyy.MM.dd}"
+    })
+    .CreateLogger();
+
+// Build the app
+builder.Services.AddHttpClient();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
