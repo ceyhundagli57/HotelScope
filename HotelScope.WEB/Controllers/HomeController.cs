@@ -15,6 +15,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        _logger.LogInformation("This is a test log from MyController");
         return View();
     }
 

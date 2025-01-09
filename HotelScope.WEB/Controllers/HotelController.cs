@@ -9,12 +9,14 @@ public class HotelController : Controller
 {
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly HttpClient _httpClient;
-    
-    public HotelController(IHttpClientFactory httpClientFactory)
+    private readonly ILogger<HotelController> _logger;
+
+    public HotelController(IHttpClientFactory httpClientFactory, ILogger<HotelController> logger )
     {
         _httpClientFactory = httpClientFactory;
         _httpClient = _httpClientFactory.CreateClient();
         _httpClient.BaseAddress = new Uri("https://localhost:7006");
+        _logger = logger;
 
     }
     // GET
@@ -22,6 +24,7 @@ public class HotelController : Controller
     {
         try
         {
+            _logger.LogInformation("Index method started.");
             HttpResponseMessage response = await _httpClient.GetAsync("hotels");
 
             response.EnsureSuccessStatusCode();
@@ -38,6 +41,7 @@ public class HotelController : Controller
         }
         catch (Exception e)
         {
+            _logger.LogError("An error occurred while fetching hotel data."); // Log error
             Console.WriteLine(e);
             throw;
         }
@@ -53,6 +57,8 @@ public class HotelController : Controller
     {
         try
         {
+            _logger.LogInformation("AddHotel method started with hotel name: {HotelName}", hotelDto.CompanyTitle);
+
             string jsonContent = JsonSerializer.Serialize(hotelDto);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
@@ -63,11 +69,16 @@ public class HotelController : Controller
             string jsonResponse = await response.Content.ReadAsStringAsync();
 
             var createdHotel = JsonSerializer.Deserialize<CreateHotelDto>(jsonResponse);
+            
+            _logger.LogInformation("Hotel successfully added:");
+
 
             return RedirectToAction("Index"); 
         }
         catch (Exception e)
         {
+            _logger.LogError( "An error occurred while adding the hotel with name: {HotelName}", hotelDto.CompanyTitle);
+
             Console.WriteLine(e);
             ViewBag.ErrorMessage = "An error occurred while adding the hotel.";
             return View(hotelDto); 
@@ -77,6 +88,8 @@ public class HotelController : Controller
     [HttpPost]
     public async Task<IActionResult> DeleteHotel(Guid hotelId)
     {
+        _logger.LogInformation("DeleteHotel method started for Hotel ID: {HotelId}", hotelId);
+
         var response = await _httpClient.DeleteAsync($"/hotels/{hotelId}");
 
         if (response.IsSuccessStatusCode)
@@ -92,6 +105,8 @@ public class HotelController : Controller
 
     public async Task<IActionResult> Details(Guid hotelId)
     {
+        _logger.LogInformation("Details method started for Hotel ID: {HotelId}", hotelId);
+
         var response = await _httpClient.GetAsync($"/hotels/{hotelId}");
 
         if (!response.IsSuccessStatusCode)
