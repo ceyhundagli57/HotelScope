@@ -139,5 +139,5 @@ Monitor message queues via the RabbitMQ Management UI at [http://localhost:15672
 
 ## Contact
 
-For questions or feedback, please contact [your-email@example.com].
+For questions or feedback, please contact [ceyhundagli57@gmail.com].
 
