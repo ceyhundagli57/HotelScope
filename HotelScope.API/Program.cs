@@ -21,7 +21,7 @@ builder.Services.AddScoped<IHotelContactInfoService, HotelContactInfoService>();
 builder.Services.AddScoped<IHotelStaffService, HotelStaffService>();
 builder.Services.AddScoped<IHotelService, HotelService>();
 builder.Services.AddSingleton<IRabbitMqConnectionManager>(
-    new RabbitMqConnectionManager("localhost", "guest", "guest"));
+    new RabbitMqConnectionManager("rabbitmq", "guest", "guest"));
 
 
 // Add services to the container.
@@ -32,11 +32,10 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 app.Services.ApplyMigrationsAndSeed();
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 app.UseHttpsRedirection();
 

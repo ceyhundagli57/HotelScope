@@ -131,22 +131,13 @@ public class ReportService: IReportService
         {
             try
             {
-                using var connection = await _rabbitMqConnectionManager.GetConnectionAsync();
-                using var channel = await connection.CreateChannelAsync();
-
-                await channel.QueueDeclareAsync(
-                    queue: "report_requests",
-                    durable: true,
-                    exclusive: false,
-                    autoDelete: false,
-                    arguments: null
-                );
-
+                await using var connection = await _rabbitMqConnectionManager.GetConnectionAsync();
+                await using var channel = await connection.CreateChannelAsync();
                
                 var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(message));
 
-                await channel.BasicPublishAsync(
-                    exchange: "report_exchange",
+                await channel.BasicPublishAsync( 
+                    exchange: string.Empty,
                     routingKey: "report_requests",
                     body: body
                 );

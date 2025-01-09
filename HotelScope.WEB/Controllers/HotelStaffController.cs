@@ -16,7 +16,7 @@ public class HotelStaffController : Controller
     {
         _httpClientFactory = httpClientFactory;
         _httpClient = _httpClientFactory.CreateClient();
-        _httpClient.BaseAddress = new Uri("https://localhost:7006");
+        _httpClient.BaseAddress = new Uri(Environment.GetEnvironmentVariable("ApiUrl") ?? throw new NotImplementedException());
         _logger = logger;
 
 

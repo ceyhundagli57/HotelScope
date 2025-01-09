@@ -16,7 +16,7 @@ public class ReportController : Controller
     {
         _httpClientFactory = httpClientFactory;
         _httpClient = _httpClientFactory.CreateClient();
-        _httpClient.BaseAddress = new Uri("https://localhost:7006");
+        _httpClient.BaseAddress = new Uri(Environment.GetEnvironmentVariable("ApiUrl") ?? throw new NotImplementedException());
         _logger = logger;
 
     }
@@ -35,7 +35,7 @@ public class ReportController : Controller
         }
 
         var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-        var response = await _httpClient.PostAsync("/reports/request", content);
+        var response = await _httpClient.PostAsync("reports/request", content);
 
         if (response.IsSuccessStatusCode)
         {
@@ -54,7 +54,7 @@ public class ReportController : Controller
     
     public async Task<IActionResult> Status(Guid reportId)
     {
-        var response = await _httpClient.GetAsync($"/reports/{reportId}/status");
+        var response = await _httpClient.GetAsync($"reports/{reportId}/status");
 
         if (!response.IsSuccessStatusCode)
         {
@@ -72,7 +72,7 @@ public class ReportController : Controller
     
     public async Task<IActionResult> Details(Guid reportId)
     {
-        var response = await _httpClient.GetAsync($"/reports/{reportId}");
+        var response = await _httpClient.GetAsync($"reports/{reportId}");
 
         if (!response.IsSuccessStatusCode)
         {
@@ -88,7 +88,7 @@ public class ReportController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var response = await _httpClient.GetAsync("/reports");
+        var response = await _httpClient.GetAsync("reports");
 
         if (!response.IsSuccessStatusCode)
         {
@@ -99,7 +99,7 @@ public class ReportController : Controller
         
         _logger.LogInformation("Successfully fetched reports list.");
         var reports = await response.Content.ReadFromJsonAsync<List<ReportSummaryDto>>();
-        return View(reports);
+        return View(reports?.OrderByDescending(x => x.RequestDate).ToList());
     }
     
 }
