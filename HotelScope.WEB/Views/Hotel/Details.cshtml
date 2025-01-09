@@ -1,0 +1,49 @@
+@model Application.DTOs.HotelDto
+
+<h1>@Model.CompanyTitle</h1>
+
+<h3>Contact Information</h3>
+@if (Model.HotelContactInfos?.Any() == true)
+{
+    <ul>
+        @foreach (var contact in Model.HotelContactInfos)
+        {
+            <li>EMAIL : @contact.Email</li>
+            <li>LOCATION :@contact.Location</li>
+            <li>PHONE NUMBER : @contact.PhoneNumber</li>
+            <form asp-action="DeleteContactInfo" asp-controller="HotelContactInfo" method="post" style="display:inline;">
+                <input type="hidden" name="contactInfoId" value="@contact.Id" />
+                <input type="hidden" name="hotelId" value="@Model.Id" />
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this contact info?');">Delete</button>
+            </form>
+        }
+    </ul>
+}
+else
+{
+    <p>No contact information available.</p>
+}
+
+<h3>Staff Members</h3>
+@if (Model.HotelStaffs?.Any() == true)
+{
+    <ul>
+        @foreach (var staff in Model.HotelStaffs)
+        {
+            <li> FIRST NAME : @staff.FirstName </li>
+            <li> LAST NAME : @staff.LastName</li>
+            <form asp-action="DeleteHotelStaff" asp-controller="HotelStaff" method="post" style="display:inline;">
+                <input type="hidden" name="staffId" value="@staff.Id" />
+                <input type="hidden" name="hotelId" value="@Model.Id" />
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this staff info?');">Delete</button>
+            </form>        }
+    </ul>
+}
+else
+{
+    <p>No staff members available.</p>
+}
+
+<a asp-action="AddContactInfo" asp-controller="HotelContactInfo" asp-route-hotelId="@Model.Id" class="btn btn-primary">Add Contact Info</a>
+<a asp-action="AddHotelStaff" asp-controller="HotelStaff" asp-route-hotelId="@Model.Id" class="btn btn-primary">Add Staff</a>
+<a href="/Hotel" class="btn btn-primary">Back to List</a>

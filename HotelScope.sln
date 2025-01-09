@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackgroundServices", "Backg
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportBackgroundService", "ReportBackgroundService\ReportBackgroundService.csproj", "{611AC7D4-9BAE-4BB5-B415-FE631A5144CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelScope.WEB", "HotelScope.WEB\HotelScope.WEB.csproj", "{E7A5D52B-8C2A-4BD1-8002-075B3EF0CB8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,9 +42,14 @@ Global
 		{611AC7D4-9BAE-4BB5-B415-FE631A5144CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{611AC7D4-9BAE-4BB5-B415-FE631A5144CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{611AC7D4-9BAE-4BB5-B415-FE631A5144CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7A5D52B-8C2A-4BD1-8002-075B3EF0CB8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7A5D52B-8C2A-4BD1-8002-075B3EF0CB8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7A5D52B-8C2A-4BD1-8002-075B3EF0CB8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7A5D52B-8C2A-4BD1-8002-075B3EF0CB8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6C43FA63-F38F-4804-975C-4857CC6655F8} = {43A16849-A689-4745-99A6-2CB94D5E7D09}
 		{611AC7D4-9BAE-4BB5-B415-FE631A5144CE} = {3DC0432F-D5E1-4CEE-9A5F-A4C637E70A50}
+		{E7A5D52B-8C2A-4BD1-8002-075B3EF0CB8C} = {43A16849-A689-4745-99A6-2CB94D5E7D09}
 	EndGlobalSection
 EndGlobal

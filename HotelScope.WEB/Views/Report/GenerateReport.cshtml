@@ -1,0 +1,18 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Application.DTOs.GenerateReportRequestDto
+
+@{
+    ViewBag.Title = "GenerateReport";
+    Layout = "_Layout";
+}
+
+<h1>Generate Report</h1>
+
+<form asp-action="GenerateReport" method="post">
+    <div class="form-group">
+        <label for="Location">Location</label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success mt-3">Generate</button>
+</form>

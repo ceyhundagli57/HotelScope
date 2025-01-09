@@ -1,0 +1,26 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<Application.DTOs.ReportSummaryDto>
+
+<h1>Reports</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var report in Model)
+    {
+        <tr>
+            <td>@report.Id</td>
+            <td>@report.Status</td>
+            <td>
+                <a asp-action="Details" asp-route-reportId="@report.Id" class="btn btn-info">View Details</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -78,7 +78,7 @@ public class ReportConsumer: BackgroundService
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             // Send the POST request
-            HttpResponseMessage response = await client.PostAsync("https://localhost:7227/reports", content);
+            HttpResponseMessage response = await client.PostAsync("https://localhost:7006/reports", content);
 
             // Check the response
             if (response.IsSuccessStatusCode)

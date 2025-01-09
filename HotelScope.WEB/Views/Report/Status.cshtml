@@ -1,0 +1,13 @@
+@model Application.DTOs.ReportStatusDto
+@{
+    ViewBag.Title = "ReportStatus";
+    Layout = "_Layout";
+}
+
+
+<h1>Report Status</h1>
+
+<p><strong>Report ID:</strong> @Model.Id</p>
+<p><strong>Status:</strong> @Model.Status</p>
+
+<a href="/Report" class="btn btn-primary">Back to Reports</a>

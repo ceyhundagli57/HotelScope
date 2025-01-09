@@ -1,0 +1,27 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<Application.DTOs.HotelDto>
+
+<h1>Hotel List</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Hotel Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var hotel in Model)
+    {
+        <tr>
+            <td>@hotel.CompanyTitle</td>
+            <td>
+                <a asp-action="Details" asp-route-hotelId="@hotel.Id" class="btn btn-info">View Details</a>
+                <form asp-action="DeleteHotel" method="post" asp-route-hotelId="@hotel.Id" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this hotel?');">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
