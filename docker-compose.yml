@@ -98,6 +98,7 @@
     depends_on:
       rabbitmq:
         condition: service_healthy
+    
 volumes:
   db_data:
   es_data:
