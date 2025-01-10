@@ -52,6 +52,7 @@ HotelScope is a microservices-based hotel directory system designed for managing
    - Web Project `http://localhost:8080`
    - RabbitMQ Management: `http://localhost:15672`
    - Kibana Dashboard: `http://localhost:5601`
+   - Api : `http://localhost:9999/swagger/index.html`
 
 ## Usage
 
@@ -71,7 +72,7 @@ The MVC service provides a user-friendly web interface to interact with the Hote
    - Navigate to the "Reports" section to:
      - Request a new report based on location.
      - View the status of existing reports (e.g., Preparing, Completed).
-     - View completed reports.
+     - View reports. Order by ascending. The latest report will be end of the page.
 
 ### Hotel Management Endpoints
 
