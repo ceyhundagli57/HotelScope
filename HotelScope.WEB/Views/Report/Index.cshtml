@@ -12,7 +12,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var report in Model.OrderBy(r=>r.RequestDate))
+    @foreach (var report in Model.OrderByDescending(r=>r.RequestDate))
     {
         <tr>
             <td>@report.Id</td>
