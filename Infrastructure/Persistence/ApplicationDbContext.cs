@@ -18,7 +18,7 @@ public class ApplicationDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseMySql( 
-            "Server=localhost;Database=HotelScope;User Id=root;Password=ceyhun1010;SslMode=Preferred;",  
+            "Server=database;Database=HotelScope;User Id=root;Password=ceyhun1010;Port=3306;SslMode=Preferred;",  
             new MySqlServerVersion(new Version(8,0,38))
         );
     }
