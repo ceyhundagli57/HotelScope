@@ -7,6 +7,7 @@ HotelScope is a microservices-based hotel directory system designed for managing
 - **Hotel Management**
   - Create and remove hotel records.
   - Add and remove hotel contact information.
+  - Add and remove hotel staff.
   - List hotel officials and contact details.
 
 - **Report Management**
