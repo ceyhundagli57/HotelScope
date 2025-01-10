@@ -17,7 +17,7 @@ Log.Logger = new LoggerConfiguration()
     .Enrich.FromLogContext()
     .WriteTo.Console() // Logs to console
     .WriteTo.Debug()
-    .WriteTo.Elasticsearch(new Serilog.Sinks.Elasticsearch.ElasticsearchSinkOptions(new Uri(Environment.GetEnvironmentVariable("ElasticsearchHost0") ?? "http://localhost:9200"))
+    .WriteTo.Elasticsearch(new Serilog.Sinks.Elasticsearch.ElasticsearchSinkOptions(new Uri(Environment.GetEnvironmentVariable("ElasticsearchHost") ?? throw new NotImplementedException()))
     {
         AutoRegisterTemplate = true,
         IndexFormat = "mvc-logs-{0:yyyy.MM.dd}"
