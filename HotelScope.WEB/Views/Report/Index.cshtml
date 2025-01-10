@@ -12,11 +12,12 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var report in Model)
+    @foreach (var report in Model.OrderBy(r=>r.RequestDate))
     {
         <tr>
             <td>@report.Id</td>
             <td>@report.Status</td>
+            <td>@report.RequestDate</td>
             <td>
                 <a asp-action="Details" asp-route-reportId="@report.Id" class="btn btn-info">View Details</a>
             </td>
